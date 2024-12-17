@@ -20,14 +20,14 @@ Q2_s = Q_s;
 Q2_s.wnear = Q_s.wnear;
 Q2_s.spmat = conv_rsc_to_spmat(S, Q2_s.row_ptr, Q2_s.col_ind, Q2_s.wnear);
 %%
-jn = @(n,z) sqrt(pi/2/z)*besselj(n+0.5,z);
-hn = @(n,z) sqrt(pi/2/z)*besselh(n+0.5,1,z);
-
-jnp = @(n,z) 0.5*(jn(n-1,z) - (jn(n,z) + z*jn(n+1,z))/z);
-hnp = @(n,z) 0.5*(hn(n-1,z) - (hn(n,z) + z*hn(n+1,z))/z);
-
-zfac = 1j*zk*zk*(jn(1,zk)*hnp(1,zk) + jnp(1,zk)*hn(1,zk))/2;
-zfac2 = 1j*zk*jn(1,zk)*hn(1,zk);
+% jn = @(n,z) sqrt(pi/2/z)*besselj(n+0.5,z);
+% hn = @(n,z) sqrt(pi/2/z)*besselh(n+0.5,1,z);
+% 
+% jnp = @(n,z) 0.5*(jn(n-1,z) - (jn(n,z) + z*jn(n+1,z))/z);
+% hnp = @(n,z) 0.5*(hn(n-1,z) - (hn(n,z) + z*hn(n+1,z))/z);
+% 
+% zfac = 1j*zk*zk*(jn(1,zk)*hnp(1,zk) + jnp(1,zk)*hn(1,zk))/2;
+% zfac2 = 1j*zk*jn(1,zk)*hn(1,zk);
 %%
 eta = 0.5;
 
@@ -49,6 +49,7 @@ srcuse.sources = S.r(:,:);
 srcuse.charges = (partialu(:).*S.wts(:)).'/4/pi;
 U_targ = hfmm3d(tol, zk, srcuse, pg, targ, pgt);
 u_s = eval_s_target(S, zk, Q2, partialu, U_targ, srcuse, targ);
+
 
 function [u] = eval_sprime(S, zk, Q, sig, U, srcuse)
     
@@ -144,8 +145,7 @@ function [u] = eval_s_target(S, zk, Q, dudn, U, srcuse, targ)
         targinfo = [];
         targinfo.r = targ(:,j);  
         targinfo.n = [0; 0; 0]; 
-        
-        % Correção de quadratura
+
         for i=1:S.npts
             iinds = horzcat(isrcinds{Q.col_ind(istarts(i):iends(i))});
             srcinfo = [];
