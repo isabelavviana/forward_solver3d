@@ -60,7 +60,6 @@ valtarg = hfmm3d(tol, zk, srcuse, pg, targ.', pgt);
 
 fprintf('Error of operator S=%d\n',norm(valtarg.pottarg-uex)/norm(uex))
 
-pause
 
 
 fprintf('Test for incoming wave - checking simmetry and if the results are the same for all the operators\n')
@@ -77,6 +76,29 @@ partialu2 = gmres(A2,b2,20,1e-6,100);
 
 fprintf('Error S=%d\n',norm(partialu1- partialu)./norm(partialu))
 fprintf('Error Sp=%d\n',norm(partialu2- partialu)./norm(partialu))
+
+
+fprintf('Testing Sprime with inside source\n')
+src = [0 0 0];
+targ = [10 0 0];
+% exact field is exp(ik|targ-src|)/(4pi|targ-src|)
+ts = norm(targ-src);
+uex = exp(1i*zk*ts)/(4*pi*ts);
+
+tbd = sqrt(S.r(1,:).^2+S.r(2,:).^2+S.r(3,:).^2);
+ubd = exp(1i*zk*tbd)./(4*pi*tbd);
+ubd = ubd.';
+
+densu = gmres(A2,ubd,20,1e-6,100);
+pg = 1;
+pgt = 1;
+srcuse = [];
+srcuse.sources = S.r(:,:);
+srcuse.charges = (densu(:).*S.wts(:)).'/4/pi;
+valtarg = hfmm3d(tol, zk, srcuse, pg, targ.', pgt);
+
+fprintf('Error of operator S prime=%d\n',norm(valtarg.pottarg-uex)/norm(uex))
+
 
 
 %% evaluate field at target points
@@ -252,6 +274,8 @@ function [u] = eval_sprime1(S, zk, Q, sig, tol)
 
     u = u + Q.spmat*sig;
     u = u + sig/2;
+
+    % u = u - sig;
 
 end
 
