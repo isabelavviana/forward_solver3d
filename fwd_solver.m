@@ -25,7 +25,7 @@ b = b.';
 A = @(sig)eval_greeneq(S,zk,Q2_s,Q2,tol,eta,sig);
 partialu = gmres(A,b);
 
-targ = [10 0 0];
+targ = sensors;
 pg = 1;
 pgt = 1;
 srcuse = [];
@@ -36,4 +36,4 @@ u_s = hfmm3d(tol, zk, srcuse, pg, targ.', pgt);
 end
 
 %to test:
-%[u_s, partialu] = fwd_solver(1e-5, 1.1, [1,4,-1], [[10,0,0].',[20,0,0].'], geometries.sphere(1,4))
+%[u_s, partialu] = fwd_solver(1e-5, 1.1, [1,4,-1], [10,0,0], geometries.sphere(1,4))
