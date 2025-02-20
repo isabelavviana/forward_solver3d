@@ -1,5 +1,19 @@
 function [u_s, partialu] = fwd_solver(tol, zk, d, sensors, mesh)
 
+%%This function solves the Forward Boundary Problem using fmmbie3d
+%This function also computes the partial of the field du/dn
+%
+%  IN : 
+% - tol (eg 10e-6)
+% - zk = wave number (eg 1.1)
+% - d = direction of the wave (eg [1,4,-1])
+% - sensors = target points (eg = [10,0,0])
+% - mesh = domain (eg geometries.sphere(1,4))
+%
+%  OUT:
+% - u_s = scattered field
+% - partialu = du/dn
+
 
 d = d/norm(d);  % inc direction (unit norm vec)
 eta = 0.5;
@@ -35,5 +49,4 @@ u_s = hfmm3d(tol, zk, srcuse, pg, targ.', pgt);
 
 end
 
-%to test:
 %[u_s, partialu] = fwd_solver(1e-5, 1.1, [1,4,-1], [10,0,0], geometries.sphere(1,4))
