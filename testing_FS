@@ -1,5 +1,6 @@
 clear all
 clc
+%same tests for the forward solver
 
 r = 1;
 na = 4;
