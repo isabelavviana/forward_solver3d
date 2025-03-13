@@ -1,4 +1,5 @@
 function [u] = eval_s_target(S, zk, Q, dudn, U, srcuse, targ)
+% calculates Sphi in the target points
 
     u = U.pottarg;  
     u = u(:);  
