@@ -1,5 +1,5 @@
 function [u] = eval_sprime1(S, zk, Q, sig, tol)
-                    
+% calculates S'phi with the U inside                    
     srcuse = [];
     srcuse.sources = S.r(:,:);
     srcuse.charges = (sig(:).*S.wts(:)).'/4/pi;
