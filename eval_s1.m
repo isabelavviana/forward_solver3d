@@ -1,5 +1,6 @@
 function [u] = eval_s1(S, zk, Q, sig, tol)
-
+% Calculate Sphi but with getting the fmm inside - similar
+% to eval_s
     srcuse = [];
     srcuse.sources = S.r(:,:);
     srcuse.charges = (sig(:).*S.wts(:)).'/4/pi;
