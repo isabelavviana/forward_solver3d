@@ -1,6 +1,8 @@
 clear
 clc
 
+
+% testing the derivative
 % F(dB+h) = F(dB) + J(hn) (dB -> r = 1, dB+h -> r=1 + h)
 % Jh = w
 % RHS = -partialu(h.n) = w
