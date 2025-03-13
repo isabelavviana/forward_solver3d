@@ -1,5 +1,5 @@
 function [u] = eval_sprime(S, zk, Q, sig, U, srcuse)
-    
+% calculates S'phi     
     u = U.grad(1,:).*S.n(1,:) + U.grad(2,:).*S.n(2,:) + ...
         U.grad(3,:).*S.n(3,:);    
     u = u(:);
