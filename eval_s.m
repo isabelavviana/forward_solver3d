@@ -1,5 +1,6 @@
 function [u] = eval_s(S, zk, Q, sig, U, srcuse)
- 
+% calculates Sphi
+
     u = U.pot; 
     u = u(:);
     % this calcualtes S and fix the quadrature.
