@@ -1,5 +1,6 @@
 clear all
 clc
+% code with all the forward tests look at this one here. More up-to-date.
 
 r = 1;
 na = 4;
