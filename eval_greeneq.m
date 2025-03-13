@@ -1,4 +1,5 @@
 function [out] = eval_greeneq(S,zk,Q1,Q2,tol,eta,sig)
+% solves using green's equation with its derivative
 
     srcuse = [];
     srcuse.sources = S.r(:,:);
